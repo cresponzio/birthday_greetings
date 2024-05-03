@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { EmailService } from './common/email.service';
+import { BirthdayService } from './employees/birthday.service';
+import { FileEmployeeRepository } from './employees/file-employee-repository.service';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    BirthdayService,
+    { provide: 'EmployeeRepository', useClass: FileEmployeeRepository },
+    EmailService
+  ],
 })
 export class AppModule {}
